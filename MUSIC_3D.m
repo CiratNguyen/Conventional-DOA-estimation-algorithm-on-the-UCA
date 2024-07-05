@@ -30,23 +30,23 @@ for l = 1:Ne
     a_C(l) = exp(1j*k3*R*sin(angles_C(2))*cos(angles_C(1)-2*pi*((l-1)/Ne))); %Signal C's steering vector at array
 end
 for l = 1:Ne
-    x_A(l,:) = a_A(l)*s_A; % x0_A=a0_A*s0_A tín hiệu A tại mảng
-    x_B(l,:) = a_B(l)*s_B; % x0_B=a0_B*s0_B tín hiệu B tại mảng
-    x_C(l,:) = a_C(l)*s_C; % x0_C=a0_C*s0_C tín hiệu C tại mảng
+    x_A(l,:) = a_A(l)*s_A; % x0_A=a0_A*s0_A 
+    x_B(l,:) = a_B(l)*s_B; % x0_B=a0_B*s0_B 
+    x_C(l,:) = a_C(l)*s_C; % x0_C=a0_C*s0_C
 end
 x = x_A+x_B+x_C; %x0=∑x0i (i=1,2,...,Ne); Tổng tín hiệu tại mảng
 x = awgn(x,SNR,'measured'); % Thêm nhiễu Gaussian trắng vào tập tín hiệu
 %% (2) Decompositing the covariance matrix
 Rx = x*x'/Sn;  % Calculating the covariance matrix
-[eigvec,eigval] = eig(Rx); % Tính giá trị riêng và vector riêng
-En = eigvec(:,1:Ne-D); % Decompositing the eigenvalues and the eigenvectors
+[eigvec,eigval] = eig(Rx);% Decompositing the eigenvalues and the eigenvectors 
+En = eigvec(:,1:Ne-D); % Constructing the noise subspace
 %% (3) Using MUSIC estimation algorithm for estimating DOA of signal(s)
 for tt = 1:length(theta)
     for pp = 1:length(phi) 
         for l = 1:Ne
             a0(l,1) = exp(1j*k*R*sin(theta(tt)*pi/180)*cos(phi(pp)*pi/180-2*pi*((l-1)/Ne)));
         end
-        Pmusic(tt,pp) = abs(1/(a0'*En*(En')*a0)); %cong thuc thuat toan MUSIC
+        Pmusic(tt,pp) = abs(1/(a0'*En*(En')*a0));
     end
 end
 %% (4) Estimating DOA of signal(s) by MUSIC
