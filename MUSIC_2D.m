@@ -32,8 +32,8 @@ for l = 1:Ne
     x_B(l,:)=a_B(l)*s_B; % Signal B at array
     x_C(l,:)=a_C(l)*s_C; % Signal C at array
 end
-x = x_A+x_B+x_C; %x0=∑x0i (i=1,2,...,Ne); Tổng tín hiệu tại mảng
-x = awgn(x,SNR,'measured'); % Thêm nhiễu Gaussian trắng vào tập tín hiệu
+x = x_A+x_B+x_C; %x0=∑x0i (i=1,2,...,Ne)
+x = awgn(x,SNR,'measured'); % Adding White Gaussian noise to signal
 %% (2) Decompositing the covariance matrix
 Rx = x*x'/Sn;  % Calculating the covariance matrix
 [eigvec,eigval] = eig(Rx); % Tính giá trị riêng và vector riêng
