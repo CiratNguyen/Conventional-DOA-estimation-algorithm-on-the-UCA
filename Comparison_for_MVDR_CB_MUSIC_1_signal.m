@@ -27,7 +27,7 @@ for SNR_idx = 1:length(SNRs)
     SNR = SNRs(SNR_idx);
     for ite = 1:1
         x1 = x;
-        x2 = awgn(x1,SNR,'measured'); % Thêm nhiễu Gaussian trắng vào tập tín hiệu
+        x2 = awgn(x1,SNR,'measured'); % Adding White Gaussian noise to signal
         %% (2) Decompositing the covariance matrix
         Rx = x2*x2'/Sn; % Calculating the covariance matrix
         [eigvec,eigval]=eig(Rx); % Decompositing the eigenvalues and the eigenvectors
