@@ -36,8 +36,8 @@ x = x_A+x_B+x_C; %x0=∑x0i (i=1,2,...,Ne)
 x = awgn(x,SNR,'measured'); % Adding White Gaussian noise to signal
 %% (2) Decompositing the covariance matrix
 Rx = x*x'/Sn;  % Calculating the covariance matrix
-[eigvec,eigval] = eig(Rx); % Tính giá trị riêng và vector riêng
-En = eigvec(:,1:Ne-D); % Decompositing the eigenvalues and the eigenvectors
+[eigvec,eigval] = eig(Rx); % Decompositing the eigenvalues and the eigenvectors 
+En = eigvec(:,1:Ne-D); % Constructing the noise subspace
 %% (3) Using MUSIC estimation algorithm for estimating DOA of signal(s)
 for pp = 1:length(phi)
     for l = 1:Ne
